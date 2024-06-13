@@ -6,14 +6,16 @@ public class PlayerScript : MonoBehaviour
 {
 	public Rigidbody rb;
 	public float moveSpeed = 2.0f;
-	public float jumpSpeed = 100.0f;
+	public float jumpSpeed = 10.0f;
+	public float addGravity = 0.05f;
 
 	private bool isFloating = false;
+	private AudioSource audioSource;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -53,8 +55,23 @@ public class PlayerScript : MonoBehaviour
 		{
 			v.y = jumpSpeed;
 		}
+		// 追加重力
+		else
+		{
+			v.y -= addGravity;
+		}
 
 		rb.velocity = v;
 	}
 
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Coin")
+		{
+			other.gameObject.SetActive(false);
+			audioSource.Play();
+			GameManagerScript.score++;
+		}
+	}
 }

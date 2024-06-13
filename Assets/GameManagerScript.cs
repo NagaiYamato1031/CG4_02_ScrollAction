@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
     public GameObject block;
     public GameObject goal;
+    public GameObject coin;
+    public TextMeshProUGUI scoreText;
+
+    // スコア
+    public static int score = 0;
 
     int[,] map =
     {
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1 },
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1 },
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,1 },
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,1,1,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1 },
-        {1,0,0,0,0,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,2,1 },
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,1,1,1,1,0,0,0,0, 0,0,0,0,0,0,1,1,1,1 },
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1 },
-        {1,0,0,0,0,1,1,0,0,0, 0,0,0,0,1,1,1,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1 },
-        {1,0,0,0,1,1,1,0,0,0, 0,0,0,1,1,1,1,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1 },
+        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,3,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,3,0,0,1 },
+        {1,0,0,0,0,0,0,0,0,0, 0,0,0,3,0,0,0,1,1,0, 0,0,0,0,0,0,0,0,0,0, 0,0,3,0,0,0,0,0,0,1 },
+        {1,0,0,0,0,0,0,0,0,0, 0,1,0,0,0,0,1,0,0,1, 0,0,0,0,3,0,0,0,0,0, 0,1,1,1,1,0,0,0,0,1 },
+        {1,0,0,0,0,0,0,0,0,3, 0,1,1,0,0,0,0,0,0,0, 0,0,1,1,1,1,1,0,0,0, 0,0,0,0,0,0,0,0,2,1 },
+        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,3,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,1,1 },
+        {1,0,0,0,0,1,1,0,0,0, 0,0,0,0,1,1,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,1,1,1,1,1 },
+        {1,0,0,3,1,1,1,0,0,0, 3,0,0,1,1,1,1,1,0,0, 0,0,0,0,0,0,0,0,1,1, 0,0,0,0,1,1,1,1,1,1 },
         {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1 }
     };
 
@@ -34,18 +40,25 @@ public class GameManagerScript : MonoBehaviour
         {
             for (int x = 0; x < map.GetLength(1); x++)
             {
+                position = new Vector3(x - 1, -y + map.GetLength(0));
                 if (map[y, x] == 1)
                 {
-                    position = new Vector3(x - 1, -y + map.GetLength(0));
                     Instantiate(block, position, Quaternion.identity);
                 }
-                if (map[y, x] == 2)
+                else if (map[y, x] == 2)
                 {
-                    position = new Vector3(x - 1, -y + map.GetLength(0));
                     goal.transform.position = position;
                 }
+                else if (map[y, x] == 3)
+                {
+                    Instantiate(coin, position, Quaternion.identity);
+                }
+                position.z += 1.0f;
+                Instantiate(block, position, Quaternion.identity);
             }
         }
+
+        score = 0;
     }
 
     // Update is called once per frame
@@ -58,5 +71,6 @@ public class GameManagerScript : MonoBehaviour
                 SceneManager.LoadScene("TitleScene");
             }
         }
+        scoreText.text = "Score : " + score;
     }
 }
