@@ -64,7 +64,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Landing
-  m_Speed: 10
+  m_Speed: 20
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3673388211311140325}
@@ -129,9 +129,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.10501182
-  m_TransitionOffset: 0.23537157
-  m_ExitTime: 0.64972854
+  m_TransitionDuration: 0.070142984
+  m_TransitionOffset: 0
+  m_ExitTime: 0.6497285
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -253,9 +253,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.23989655
+  m_TransitionDuration: 0.124306254
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 0.000000011880199
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -278,7 +278,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.34805065
+  m_TransitionDuration: 0.1611868
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0

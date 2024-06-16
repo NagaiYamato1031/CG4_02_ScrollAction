@@ -7,6 +7,7 @@ using TMPro;
 public class GameManagerScript : MonoBehaviour
 {
     public GameObject block;
+    public GameObject block2;
     public GameObject goal;
     public GameObject coin;
     public TextMeshProUGUI scoreText;
@@ -54,7 +55,7 @@ public class GameManagerScript : MonoBehaviour
                     Instantiate(coin, position, Quaternion.identity);
                 }
                 position.z += 1.0f;
-                Instantiate(block, position, Quaternion.identity);
+                Instantiate(block2, position, Quaternion.identity);
             }
         }
 
