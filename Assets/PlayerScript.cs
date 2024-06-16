@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     public Rigidbody rb;
+    public Animator animator;
     public float moveSpeed = 2.0f;
     public float jumpSpeed = 10.0f;
     public float addGravity = 0.05f;
@@ -41,15 +42,18 @@ public class PlayerScript : MonoBehaviour
             0 < stick)
         {
             v.x = moveSpeed;
+            animator.SetBool("isMove", true);
         }
         else if (Input.GetKey(KeyCode.LeftArrow) ||
             Input.GetKey(KeyCode.A) ||
             stick < 0)
         {
             v.x = -moveSpeed;
+            animator.SetBool("isMove", true);
         }
         else
         {
+            animator.SetBool("isMove", false);
             v.x = 0;
         }
 
@@ -57,14 +61,23 @@ public class PlayerScript : MonoBehaviour
         if (!isFloating && Input.GetButtonDown("Jump"))
         {
             v.y = jumpSpeed;
+            animator.SetBool("jump", true);
         }
         // 追加重力
         else
         {
             v.y -= addGravity;
+            animator.SetBool("jump", false);
         }
 
         rb.velocity = v;
+        Quaternion rot = transform.rotation;
+        rot.y = v.x < 0 ? 180.0f : 0.0f;
+        transform.rotation = rot;
+
+        // フラグ
+        animator.SetBool("isFloating", isFloating);
+
     }
 
 
