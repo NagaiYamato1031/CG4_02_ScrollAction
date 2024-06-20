@@ -7,7 +7,8 @@ public class PlayerScript : MonoBehaviour
 {
 	public Rigidbody rb;
 	public Animator animator;
-	public float moveSpeed = 2.0f;
+    public GameObject bombPatricle;
+    public float moveSpeed = 2.0f;
 	public float jumpSpeed = 10.0f;
 	public float addGravity = 0.05f;
 
@@ -94,6 +95,7 @@ public class PlayerScript : MonoBehaviour
 			other.gameObject.SetActive(false);
 			audioSource.Play();
 			GameManagerScript.score++;
+			Instantiate(bombPatricle, transform.position, Quaternion.identity);
 		}
 	}
 }

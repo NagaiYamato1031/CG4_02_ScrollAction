@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2135130036359902275}
   animator: {fileID: 5663762246753300178}
+  bombPatricle: {fileID: 7581723071723315279, guid: e27bc39a3d9055c4787501b7025f5e77, type: 3}
   moveSpeed: 2
   jumpSpeed: 13
   addGravity: 0.2

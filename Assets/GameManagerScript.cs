@@ -11,6 +11,7 @@ public class GameManagerScript : MonoBehaviour
 	public GameObject goal;
 	public GameObject coin;
 	public TextMeshProUGUI scoreText;
+	public GameObject goalPatricle;
 
 	// スコア
 	public static int score = 0;
@@ -49,6 +50,7 @@ public class GameManagerScript : MonoBehaviour
 				else if (map[y, x] == 2)
 				{
 					goal.transform.position = position;
+					goalPatricle.transform.position = position;
 				}
 				else if (map[y, x] == 3)
 				{
